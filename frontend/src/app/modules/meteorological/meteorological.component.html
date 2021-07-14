@@ -1,0 +1,95 @@
+<form [formGroup]="form">
+  <div class="form-group mb-4">
+    <label class="font-weight-bold">Cidade</label>
+    <div class="input-group">
+      <input type="text" class="form-control" placeholder="Digite a cidade desejada" formControlName="city" (keyup.enter)="getWeather()">
+      <div class="input-group-append">
+        <span class="input-group-text" (click)="getWeather()">
+          <span class="material-icons search-icons-class">search</span>
+        </span>
+      </div>
+    </div>
+    <div *ngIf="submitted && f.city.errors" class="invalid-feedback d-block pl-1">
+      <div *ngIf="f.city.errors.required">O campo cidade é obrigatório.</div>
+    </div>
+  </div>
+</form>
+
+<alert-error *ngIf="notFound"></alert-error>
+
+<div *ngIf="weekForecast" class="mb-4">
+  <div class="row row-cols-1 row-cols-md-1 row-cols-lg-1 row-cols-xl-2">
+    <div class="col mb-4">
+      <div class="card shadow-sm">
+        <div class="card-body">
+          <h4 class="card-title mb-0">{{ weekForecast.results.city }}</h4>
+          <h6 class="card-subtitle mb-2 text-muted">Hoje, {{ weekForecast.results.date }}</h6>
+          <div class="d-flex card-text">
+            <div class="p-2 d-flex justify-content-center align-items-center flex-column flex-grow-1">
+              <div class="p-2">
+                <condition-slug [condition]="weekForecast.results.condition_slug"></condition-slug>
+              </div>
+              <div class="p-2">{{ weekForecast.results.description }}</div>
+            </div>
+
+            <div class="p-2">
+              <p class="card-text d-flex align-items-center p-1">
+                <span class="material-icons mr-2 icons-class">thermostat</span>
+                Temperatura: {{ weekForecast.results.temp }} ˚C
+              </p>
+              <p class="card-text d-flex align-items-center p-1">
+                <span class="material-icons mr-2 icons-class">water_drop</span>
+                Umidade: {{ weekForecast.results.humidity }}%
+              </p>
+              <p class="card-text d-flex align-items-center p-1">
+                <span class="material-icons mr-2 icons-class">air</span>
+                Velocidade dos ventos: {{ weekForecast.results.wind_speedy }}
+              </p>
+              <p class="card-text d-flex align-items-center p-1">
+                <span class="material-icons mr-2 icons-class">wb_sunny</span>
+                Nascer do sol: {{ weekForecast.results.sunrise }}
+              </p>
+              <p class="card-text d-flex align-items-center p-1">
+                <span class="material-icons mr-2 icons-class">nights_stay </span>
+                Pôr do sol: {{ weekForecast.results.sunset }}
+              </p>
+            </div>
+
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div *ngIf="weekForecast" class="mb-4">
+  <h4>Próximos dias</h4>
+  <div class="row row-cols-1 row-cols-md-2 row-cols-lg-2 row-cols-xl-3">
+    <div *ngFor="let item of weekForecast.results.forecast; let first = first;" class="col mb-4" [class.d-none]="first">
+      <div class="card shadow-sm">
+        <div class="card-body">
+          <h4 class="card-title">{{ item.weekday }}, {{ item.date }}</h4>
+          <div class="d-flex card-text">
+            <div class="p-2 d-flex justify-content-center align-items-center flex-column flex-grow-1">
+              <div class="p-2">
+                <condition-slug [condition]="item.condition"></condition-slug>
+              </div>
+              <div class="p-2">{{ item.description }}</div>
+            </div>
+
+            <div class="p-2">
+              <p class="card-text d-flex align-items-center p-1">
+                <span class="material-icons mr-2 icons-class">expand_less</span>
+                Mínima: {{ item.min }} ˚C
+              </p>
+              <p class="card-text d-flex align-items-center p-1">
+                <span class="material-icons mr-2 icons-class">keyboard_arrow_down</span>
+                Máxima: {{ item.max }} ˚C
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,41 @@
+@import 'vars';
+
+.sidebar-menu {
+  display: flex;
+  ul {
+    small {
+      font-size: 10px;
+      color: $gray-400;
+    }
+    li {
+      padding: 8px;
+      &:hover {
+        a {
+          color: $white;
+          transition: all 0.3s;
+          span {
+            color: $white;
+            transition: all 0.3s;
+          }
+        }
+      }
+      a {
+        text-decoration: none;
+        font-size: 15px;
+        display: block;
+        color: $gray-400;
+        span {
+          font-size: 18px;
+          color: $gray-400;
+        }
+        &.active {
+          color: $white;
+          span {
+            color: $white;
+
+          }
+        }
+      }
+    }
+  }
+}

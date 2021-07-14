@@ -1,0 +1,21 @@
+<div class="wrapper d-flex w-100 ">
+	<nav id="sidebar" [class.collapsed]="!openSidebar">
+		<div class="d-flex align-items-center sidebar-header shadow-sm p-3 mb-4">
+      <h1 class="mb-0">Current Forecast Weather</h1>
+		</div>
+    <app-menu></app-menu>
+	</nav>
+
+	<div id="content" [class.collapsed]="!openSidebar" [class.mobile]="isMobile">
+		<nav class="navbar navbar-light shadow p-3 bg-white">
+			<span role="button" class="material-icons pointer" (click)="toogle">menu</span>
+			<span role="button" class="material-icons ml-auto">perm_identity</span>
+		</nav>
+
+		<div class="container-fluid">
+      <router-outlet></router-outlet>
+		</div>
+	</div>
+</div>
+
+<div [class.overlay]="isMobile && openSidebar" (click)="toogle"></div>

@@ -1,0 +1,22 @@
+@import 'vars';
+
+.material-icons {
+  font-size: 60px;
+
+  &.condition-storm,
+  &.condition-snow,
+  &.condition-hail,
+  &.condition-rain {
+    color: $blue;
+  }
+  &.condition-cloud {
+    color: $gray-400;
+  }
+  &.condition-clear-day {
+    color: $yellow;
+  }
+  &.condition-clear-nigth,
+  &.condition-cloudly-night {
+    color: $blue-darken;
+  }
+}
